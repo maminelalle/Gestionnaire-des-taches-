@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Liste des Tâches</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Styles communs */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+            margin: 20px;
+        }
+
+        .container {
+            max-width: 1050px;
+            width: 90%;
+            margin: auto;
+        }
+
+        .navbar {
+            width: 100%;
+            background-color: #ffffff;
+            box-shadow: 0 1px 4px rgb(146 161 176 / 15%);
+            position: relative;
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+            height: 62px;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-container img {
+            height: 40px;
+            margin-right: 10px;
+        }
+
+        .logo-text {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #007bff;
+        }
+
+        .menu-toggle {
+            display: none;
+            font-size: 26px;
+            cursor: pointer;
+        }
+
+        #nav-links {
+            list-style: none;
+            display: flex;
+        }
+
+        #nav-links li {
+            margin-left: 20px;
+        }
+
+        #nav-links a {
+            text-decoration: none;
+            color: #1c78da;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: font-weight 0.2s;
+        }
+
+        #nav-links a:hover {
+            font-weight: bolder;
+        }
+
+        @media (max-width: 768px) {
+            .menu-toggle {
+                display: block;
+            }
+
+            #nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 62px;
+                left: 0;
+                width: 100%;
+                background-color: #ffffff;
+                box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.2);
+                padding: 15px 0;
+            }
+
+            #nav-links li {
+                margin: 10px 0;
+                text-align: center;
+            }
+
+            #nav-links.active {
+                display: flex;
+            }
+        }
+
+        h1 {
+            text-align: center;
+            margin: 40px 0 30px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: #ffffff;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .btn {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .btn-edit {
+            background-color: #ffc107;
+            color: black;
+        }
+
+        .btn-delete {
+            background-color: #dc3545;
+            color: white;
+        }
+    </style>
+    <script>
+        function toggleMenu() {
+            const navLinks = document.getElementById("nav-links");
+            navLinks.classList.toggle("active");
+        }
+    </script>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo-container">
+                <img src="/images/logo.webp" alt="Logo du site">
+                <div class="logo-text">Gestionnaire des Tâches</div>
+            </div>
+            <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+            <ul id="nav-links">
+                <li><a href="/accueil">Accueil</a></li>
+                <li><a href="/taches">Tâches</a></li>
+                <li><a href="/ajouter">Ajouter</a></li>
+                <li><a href="/login">Déconnexion</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <h1>Liste des Tâches</h1>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Description</th>
+                <th>Statut</th>
+                <th>Date Limite</th>
+                <th>Priorité</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="tache : ${taches}">
+                <td th:text="${tache.titre}"></td>
+                <td th:text="${tache.description}"></td>
+                <td th:text="${tache.statut}"></td>
+                <td th:text="${tache.dateLimite}"></td>
+                <td th:text="${tache.priorite}"></td>
+                <td>
+                    <a th:href="@{'/modifier/' + ${tache.id}}" class="btn btn-edit">Modifier</a>
+                    <a th:href="@{'/supprimer/' + ${tache.id}}" class="btn btn-delete" onclick="return confirm('Êtes-vous sûr de vouloir supprimer cette tâche ?')">Supprimer</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+</html>

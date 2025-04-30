@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Accueil - Gestionnaire de Tâches</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: #f4f7fb;
+      color: #333;
+    }
+
+    .navbar {
+      background: #fff;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      padding: 15px 40px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .navbar .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .navbar .logo-container img {
+      height: 45px;
+      width: auto;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    .navbar .logo-text {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #007bff;
+    }
+
+    .navbar ul {
+      display: flex;
+      gap: 30px;
+      list-style: none;
+    }
+
+    .navbar ul li a {
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .navbar ul li a:hover {
+      color: #1885fb;
+    }
+
+    .hero {
+      padding: 60px 20px 40px;
+    }
+
+    .hero-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+      flex-wrap: wrap;
+      padding: 0 20px;
+    }
+
+    .hero-text {
+      flex: 1;
+      min-width: 250px;
+    }
+
+    .hero-text h1 {
+      font-size: 2.5rem;
+      color: #2d3748;
+      margin-bottom: 10px;
+    }
+
+    .hero-text p {
+      font-size: 1.1rem;
+      color: #555;
+      margin-bottom: 25px;
+    }
+
+    .hero-img {
+      flex: 1;
+      min-width: 250px;
+      text-align: center;
+    }
+
+    .hero-img img {
+      width: 90%;
+      max-width: 350px;
+      border-radius: 12px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    }
+
+    .cta a {
+      text-decoration: none;
+      background: #007bff;
+      color: #fff;
+      padding: 12px 24px;
+      font-size: 1rem;
+      border-radius: 8px;
+      transition: background 0.3s ease;
+    }
+
+    .cta a:hover {
+      background: #107ff5;
+    }
+
+    @media (max-width: 768px) {
+      .navbar ul {
+        flex-direction: column;
+        background: #fff;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        right: 0;
+        display: none;
+        text-align: center;
+        padding: 20px 0;
+      }
+
+      .navbar ul.active {
+        display: flex;
+      }
+
+      .menu-toggle {
+        display: block;
+        cursor: pointer;
+        font-size: 1.5rem;
+      }
+
+      .hero-content {
+        flex-direction: column-reverse;
+        text-align: center;
+      }
+
+      .hero-img img {
+        width: 70%;
+      }
+    }
+
+    .menu-toggle {
+      display: none;
+    }
+    #nav-links a {
+            text-decoration: none;
+            color: #1c78da;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: font-weight 0.2s;
+        }
+
+        #nav-links a:hover {
+            font-weight: bolder;
+        }
+
+  </style>
+</head>
+<body>
+
+  <nav class="navbar">
+    <div class="logo-container">
+      <img src="/images/logo.webp" alt="Logo du site">
+      <div class="logo-text">Gestionnaire des Tâches</div>
+    </div>
+    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+    <ul id="nav-links">
+      <li><a href="/accueil">Accueil</a></li>
+      <li><a href="/taches">Tâches</a></li>
+      <li><a href="/ajouter">Ajouter</a></li>
+      <li><a href="/login">Déconnexion</a></li>
+    </ul>
+  </nav>
+
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1>Bienvenue sur votre Gestionnaire de Tâches</h1>
+        <p>Gérez vos tâches au quotidien avec clarté et efficacité.</p>
+        <div class="cta">
+          <a href="/taches">Voir mes tâches</a>
+        </div>
+      </div>
+      <div class="hero-img">
+        <img src="/images/OIP.jpeg" alt="Illustration gestion des tâches">
+      </div>
+    </div>
+  </section>
+
+  <script>
+    function toggleMenu() {
+      document.getElementById("nav-links").classList.toggle("active");
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modifier une Tâche</title>
+    <style>
+        /* Styles généraux */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f4f7fc;
+        }
+
+        .container {
+            max-width: 1050px;
+            width: 90%;
+            margin: auto;
+        }
+
+        /* Barre de navigation */
+        .navbar {
+            background: #fff;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .navbar .logo-container img {
+            height: 45px;
+            width: auto;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        .navbar .logo-text {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #007bff;
+        }
+
+        .navbar ul {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .navbar ul li a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .navbar ul li a:hover {
+            color: #1885fb;
+        }
+
+        .menu-toggle {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .navbar ul {
+                flex-direction: column;
+                background: #fff;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                right: 0;
+                display: none;
+                text-align: center;
+                padding: 20px 0;
+            }
+
+            .navbar ul.active {
+                display: flex;
+            }
+
+            .menu-toggle {
+                display: block;
+                cursor: pointer;
+                font-size: 1.5rem;
+            }
+        }
+
+        /* Style du formulaire de modification */
+        .form-container {
+            background-color: white;
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-top: 40px;
+        }
+
+        .form-container h2 {
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            color: #333;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 1rem;
+            color: #555;
+            margin-bottom: 8px;
+        }
+
+        .input-group input, .input-group textarea, .input-group select {
+            width: 100%;
+            padding: 12px;
+            font-size: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .input-group input:focus, .input-group textarea:focus, .input-group select:focus {
+            outline: none;
+            border-color: #5c6bc0;
+        }
+
+        .input-group textarea {
+            resize: vertical;
+            height: 150px;
+        }
+
+        button[type="submit"] {
+            background-color: #5c6bc0;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #4f5bcb;
+        }
+
+        #nav-links a {
+            text-decoration: none;
+            color: #1c78da;
+            font-weight: 500;
+            font-size: 1rem;
+            transition: font-weight 0.2s;
+        }
+
+        #nav-links a:hover {
+            font-weight: bolder;
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Barre de navigation -->
+    <nav class="navbar">
+        <div class="logo-container">
+            <img src="/images/logo.webp" alt="Logo du site">
+            <div class="logo-text">Gestionnaire des Tâches</div>
+        </div>
+        <div class="menu-toggle" onclick="toggleMenu()">☰</div>
+        <ul id="nav-links">
+            <li><a href="/accueil">Accueil</a></li>
+            <li><a href="/taches">Tâches</a></li>
+            <li><a href="/ajouter">Ajouter</a></li>
+            <li><a href="/login">Déconnexion</a></li>
+        </ul>
+    </nav>
+
+    <!-- Formulaire de modification de tâche -->
+    <div class="form-container">
+        <h2>Modifier une tâche</h2>
+
+        <form action="/modifier" method="POST">
+            <div class="input-group">
+                <label for="nom">Nom de la tâche :</label>
+                <input type="text" id="nom" name="nom" value="${tache.nom}" required>
+            </div>
+            <div class="input-group">
+                <label for="description">Description :</label>
+                <textarea id="description" name="description" required>${tache.description}</textarea>
+            </div>
+            <div class="input-group">
+                <label for="dateLimite">Date limite :</label>
+                <input type="date" id="dateLimite" name="dateLimite" value="${tache.dateLimite}" required>
+            </div>
+            <div class="input-group">
+                <label for="priorite">Priorité :</label>
+                <select id="priorite" name="priorite" required>
+                    <option value="faible" th:selected="${tache.priorite == 'faible'}">Faible</option>
+                    <option value="moyenne" th:selected="${tache.priorite == 'moyenne'}">Moyenne</option>
+                    <option value="haute" th:selected="${tache.priorite == 'haute'}">Haute</option>
+                </select>
+            </div>
+            <div class="input-group">
+                <label for="statut">Statut :</label>
+                <select id="statut" name="statut" required>
+                    <option value="EN_ATTENTE" th:selected="${tache.statut == 'EN_ATTENTE'}">En attente</option>
+                    <option value="EN_COURS" th:selected="${tache.statut == 'EN_COURS'}">En cours</option>
+                    <option value="TERMINE" th:selected="${tache.statut == 'TERMINE'}">Terminé</option>
+                </select>
+            </div>
+            <button type="submit">Modifier</button>
+        </form>
+    </div>
+
+    <script>
+        function toggleMenu() {
+            var menuLinks = document.getElementById('nav-links');
+            menuLinks.classList.toggle('active');
+        }
+    </script>
+</body>
+</html>

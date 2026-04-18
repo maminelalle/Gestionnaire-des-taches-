@@ -19,9 +19,18 @@ public class TacheService {
         return repo.findAll();
     }
 
+    public long countAll() {
+        return repo.count();
+    }
+
+    public long countByStatut(Statut statut) {
+        return repo.countByStatut(statut);
+    }
+
     public Tache save(Tache t) {
         if (t.getPriorite() != null) {
             switch (t.getPriorite().toUpperCase()) {
+                case "BASSE" -> t.setDateLimite(LocalDate.now().plusDays(7));
                 case "HAUTE" -> t.setDateLimite(LocalDate.now().plusDays(1));
                 case "MOYENNE" -> t.setDateLimite(LocalDate.now().plusDays(3));
                 default -> t.setDateLimite(LocalDate.now().plusDays(7));

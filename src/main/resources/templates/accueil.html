@@ -2,207 +2,117 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Accueil - Gestionnaire de Tâches</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: #f4f7fb;
-      color: #333;
-    }
-
-    .navbar {
-      background: #fff;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-      padding: 15px 40px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-
-    .navbar .logo-container {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .navbar .logo-container img {
-      height: 45px;
-      width: auto;
-      border-radius: 8px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-    }
-
-    .navbar .logo-text {
-      font-size: 1.5rem;
-      font-weight: 600;
-      color: #007bff;
-    }
-
-    .navbar ul {
-      display: flex;
-      gap: 30px;
-      list-style: none;
-    }
-
-    .navbar ul li a {
-      text-decoration: none;
-      color: #333;
-      font-weight: 500;
-      transition: color 0.3s ease;
-    }
-
-    .navbar ul li a:hover {
-      color: #1885fb;
-    }
-
-    .hero {
-      padding: 60px 20px 40px;
-    }
-
-    .hero-content {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 30px;
-      flex-wrap: wrap;
-      padding: 0 20px;
-    }
-
-    .hero-text {
-      flex: 1;
-      min-width: 250px;
-    }
-
-    .hero-text h1 {
-      font-size: 2.5rem;
-      color: #2d3748;
-      margin-bottom: 10px;
-    }
-
-    .hero-text p {
-      font-size: 1.1rem;
-      color: #555;
-      margin-bottom: 25px;
-    }
-
-    .hero-img {
-      flex: 1;
-      min-width: 250px;
-      text-align: center;
-    }
-
-    .hero-img img {
-      width: 90%;
-      max-width: 350px;
-      border-radius: 12px;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
-    }
-
-    .cta a {
-      text-decoration: none;
-      background: #007bff;
-      color: #fff;
-      padding: 12px 24px;
-      font-size: 1rem;
-      border-radius: 8px;
-      transition: background 0.3s ease;
-    }
-
-    .cta a:hover {
-      background: #107ff5;
-    }
-
-    @media (max-width: 768px) {
-      .navbar ul {
-        flex-direction: column;
-        background: #fff;
-        position: absolute;
-        top: 70px;
-        left: 0;
-        right: 0;
-        display: none;
-        text-align: center;
-        padding: 20px 0;
-      }
-
-      .navbar ul.active {
-        display: flex;
-      }
-
-      .menu-toggle {
-        display: block;
-        cursor: pointer;
-        font-size: 1.5rem;
-      }
-
-      .hero-content {
-        flex-direction: column-reverse;
-        text-align: center;
-      }
-
-      .hero-img img {
-        width: 70%;
-      }
-    }
-
-    .menu-toggle {
-      display: none;
-    }
-    #nav-links a {
-            text-decoration: none;
-            color: #1c78da;
-            font-weight: 500;
-            font-size: 1rem;
-            transition: font-weight 0.2s;
-        }
-
-        #nav-links a:hover {
-            font-weight: bolder;
-        }
-
-  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/app.css">
 </head>
 <body>
-
   <nav class="navbar">
-    <div class="logo-container">
-      <img src="/images/logo.webp" alt="Logo du site">
-      <div class="logo-text">Gestionnaire des Tâches</div>
+    <div class="nav-inner">
+      <a class="brand" href="/accueil">
+        <img class="brand-mark" src="/images/logo.webp" alt="Logo du site">
+        <div class="brand-text">
+          <strong>Gestionnaire des Tâches</strong>
+          <span>Organisation claire, interface moderne</span>
+        </div>
+      </a>
+      <button class="menu-toggle" type="button" onclick="toggleMenu()" aria-label="Ouvrir le menu">☰</button>
+      <ul id="nav-links" class="nav-links">
+        <li><a class="is-active" href="/accueil">Accueil</a></li>
+        <li><a href="/taches">Tâches</a></li>
+        <li><a href="/ajouter">Ajouter</a></li>
+        <li><a href="/login">Déconnexion</a></li>
+      </ul>
     </div>
-    <div class="menu-toggle" onclick="toggleMenu()">☰</div>
-    <ul id="nav-links">
-      <li><a href="/accueil">Accueil</a></li>
-      <li><a href="/taches">Tâches</a></li>
-      <li><a href="/ajouter">Ajouter</a></li>
-      <li><a href="/login">Déconnexion</a></li>
-    </ul>
   </nav>
 
-  <section class="hero">
-    <div class="hero-content">
-      <div class="hero-text">
-        <h1>Bienvenue sur votre Gestionnaire de Tâches</h1>
-        <p>Gérez vos tâches au quotidien avec clarté et efficacité.</p>
-        <div class="cta">
-          <a href="/taches">Voir mes tâches</a>
+  <main class="site-shell">
+    <section class="page-hero">
+      <div class="hero-grid">
+        <div class="hero-panel">
+          <span class="eyebrow">Tableau de bord</span>
+          <h1 class="hero-title">Pilotez vos tâches avec une vue plus nette et plus rapide.</h1>
+          <p class="hero-text">
+            Un espace pensé pour présenter vos tâches, accélérer les modifications et obtenir des captures propres pour le README.
+          </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="/taches">Voir les tâches</a>
+            <a class="btn btn-secondary" href="/ajouter">Créer une tâche</a>
+          </div>
+        </div>
+
+        <div class="hero-aside">
+          <div class="surface-card hero-visual">
+            <img src="/images/OIP.jpeg" alt="Illustration gestion des tâches">
+            <div class="mini-note">
+              <div>
+                <strong>Interface modernisée</strong>
+                <span>Cartes, tableaux et formulaires uniformes</span>
+              </div>
+              <span class="icon-badge">✓</span>
+            </div>
+          </div>
         </div>
       </div>
-      <div class="hero-img">
-        <img src="/images/OIP.jpeg" alt="Illustration gestion des tâches">
+    </section>
+
+    <section class="stats-grid">
+      <article class="stats-card">
+        <div class="label">Tâches totales</div>
+        <div class="value" th:text="${taskCount}">0</div>
+        <div class="hint">Vue globale du projet.</div>
+      </article>
+      <article class="stats-card">
+        <div class="label">En attente</div>
+        <div class="value" th:text="${pendingCount}">0</div>
+        <div class="hint">Travail à lancer en priorité.</div>
+      </article>
+      <article class="stats-card">
+        <div class="label">En cours</div>
+        <div class="value" th:text="${inProgressCount}">0</div>
+        <div class="hint">Les actions en progression.</div>
+      </article>
+      <article class="stats-card">
+        <div class="label">Terminées</div>
+        <div class="value" th:text="${doneCount}">0</div>
+        <div class="hint">Les tâches déjà livrées.</div>
+      </article>
+    </section>
+
+    <section>
+      <div class="section-header">
+        <div>
+          <h2>Actions rapides</h2>
+          <p>Les entrées les plus utiles pour les captures du README.</p>
+        </div>
       </div>
-    </div>
-  </section>
+      <div class="features-grid features-grid-3">
+        <article class="feature-card">
+          <span class="icon-badge">01</span>
+          <h3>Créer une tâche</h3>
+          <p>Ajoutez rapidement un titre, une description, une priorité et un statut dans un formulaire plus lisible.</p>
+        </article>
+        <article class="feature-card">
+          <span class="icon-badge">02</span>
+          <h3>Suivre l’avancement</h3>
+          <p>La page de liste met en avant les statuts et les actions avec des badges lisibles et une table plus aérée.</p>
+        </article>
+        <article class="feature-card">
+          <span class="icon-badge">03</span>
+          <h3>Modifier en confiance</h3>
+          <p>Le formulaire d’édition est maintenant lié correctement au modèle Thymeleaf pour afficher les bonnes valeurs.</p>
+        </article>
+      </div>
+    </section>
+    <div class="footer-space"></div>
+  </main>
 
   <script>
     function toggleMenu() {
-      document.getElementById("nav-links").classList.toggle("active");
+      document.getElementById('nav-links').classList.toggle('active');
     }
   </script>
 </body>

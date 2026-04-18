@@ -1,6 +1,7 @@
 package com.example.gestiontaches.controller;
 
 import com.example.gestiontaches.model.Tache;
+import com.example.gestiontaches.model.Statut;
 import com.example.gestiontaches.service.TacheService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -15,7 +16,11 @@ public class TacheController {
 
     // On mappe la racine ET /accueil sur la même méthode
     @GetMapping({"/", "/accueil"})
-    public String accueil() {
+    public String accueil(Model model) {
+        model.addAttribute("taskCount", service.countAll());
+        model.addAttribute("pendingCount", service.countByStatut(Statut.EN_ATTENTE));
+        model.addAttribute("inProgressCount", service.countByStatut(Statut.EN_COURS));
+        model.addAttribute("doneCount", service.countByStatut(Statut.TERMINE));
         return "accueil";  // renvoie à templates/accueil.html
     }
 

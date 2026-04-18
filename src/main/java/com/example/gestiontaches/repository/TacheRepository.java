@@ -8,4 +8,6 @@ import java.util.List;
 
 public interface TacheRepository extends JpaRepository<Tache, Long> {
     List<Tache> findByStatut(Statut statut);
+
+    long countByStatut(Statut statut);
 }
